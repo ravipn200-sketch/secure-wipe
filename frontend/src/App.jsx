@@ -4,7 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 const API_URL =
   window.location.hostname === "localhost" ||
   window.location.hostname === "127.0.0.1"
-    ? `${window.location.protocol}//${window.location.hostname}:5000/api`
+    ? `https://secure-wipe-p6in.onrender.com/api`
     : "https://secure-wipe-p6in.onrender.com/api";
 
 import {
@@ -642,7 +642,7 @@ function DeviceManager() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
-  const API_URL = `${window.location.protocol}//${window.location.hostname}:5000/api`;
+  const API_URL = `https://secure-wipe-p6in.onrender.com/api`;
 
   // Load devices from backend when the page opens
   useEffect(() => {
@@ -941,7 +941,7 @@ function RecoveryWorkspace() {
 
   const [recoveredFiles, setRecoveredFiles] = useState([]);
   const [filter, setFilter] = useState("All");
-const API_URL = `${window.location.protocol}//${window.location.hostname}:5000/api`;
+const API_URL = `https://secure-wipe-p6in.onrender.com/api`;
 
   const recoveryFiles = [
     {
