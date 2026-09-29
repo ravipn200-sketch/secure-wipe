@@ -1,0 +1,30 @@
+SECUREWIPE FORENSICS
+ERASURE AUDIT RECORD
+====================
+
+Target:
+C:\Users\HP\SecureWipe-Forensics\core\testdata\erase_test_image.bin
+
+Size:
+10485760 bytes
+
+Method:
+Single-pass random overwrite
+
+BEFORE SHA-256:
+e4c348f75eebf4c79ec6e890a36f2fb7a9955101d0b97f0fd5128a90715934d9
+
+AFTER SHA-256:
+d241ff1f84a8aaf869370ff4091f9e10fdb331931f6eac27227c893b47a194c2
+
+VERIFICATION:
+PASS
+
+PHYSICAL DISK ACCESS:
+DISABLED
+
+SAFETY MODE:
+TEST IMAGE ONLY
+
+STATUS:
+TEST IMAGE SANITIZED

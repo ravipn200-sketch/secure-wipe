@@ -1,0 +1,19 @@
+SECUREWIPE FORENSICS RECOVERY REPORT
+====================================
+
+Analysis mode : READ-ONLY
+Physical disk : DISABLED
+Source image  : C:\Users\HP\SecureWipe-Forensics\core\testdata\test_image.bin
+Image size    : 10485760 bytes
+Files found   : 1
+
+Detected objects
+-----------------
+1. PDF .pdf @ offset 1024 | estimated size 50 bytes
+   Output: C:\Users\HP\SecureWipe-Forensics\core\testdata\backend_recovered\recovered_0001.pdf
+
+Safety verification
+--------------------
+Source image modified : NO
+Physical storage modified : NO
+Recovery operation : READ-ONLY

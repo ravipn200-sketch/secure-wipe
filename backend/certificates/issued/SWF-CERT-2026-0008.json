@@ -1,0 +1,30 @@
+{
+  "certificateId": "SWF-CERT-2026-0008",
+  "issuedAt": "2026-09-15T14:56:41.738Z",
+  "operator": "investigator",
+  "target": "erase_test_image.bin",
+  "method": "Single-pass random overwrite",
+  "sizeBytes": 10485760,
+  "beforeHash": "a7eb9cfacdb26c0e57993c3c30855cdc149f28a4ecca59973992738fb86f1a5c",
+  "afterHash": "a2e128a30ac84658819d0544eda2749da09c166f379278c98957717361264ad8",
+  "verification": "PASS",
+  "physicalDiskAccess": false,
+  "safetyMode": "TEST IMAGE ONLY",
+  "auditRecordHash": "5a33efafcd349f540a93fc3913543bafdb023dd44dec42e44dc98846121a7d3c",
+  "auditChainStatus": "VERIFIED",
+  "blockchainStatus": "READY_FOR_ANCHORING",
+  "certificateHash": "ef986eb7da0c37cdf5613ea9c7413fd8b40f5bd6103336a7888d795185c020f6",
+  "signatureAlgorithm": "RSA-SHA256",
+  "signature": "Ss9PXW2N3/GL/yOMCawvNRVOF1q/m9eWB+QztcZS8AQ0AqTl/NPZR1t5gaDQvALyE1ck6H+zMjqcOGTc1vjlO2VITAaDjq60qsc2QPDmA8T+jdz0xwhxeMi2tM/BHajy0L7Yvw0jO4sNDbUf/Vz+lVnKnQj9KN7NnrRTr7qXJiw9vSjhXZlp9iBqrrCagPRnBLYomDcWz0M3gzxLjY/EQPGiEP40ncbJ49FntESg6EF3O39div8eaoub64a0UKzeFvlZVXshSF7zSprmtn2Gj5FV7t9xuQsFA4DaaGrZcF3SCSbulfvGeHYHNudeB6i2mSYfmOP0DdKq1RqcQ2F+ScIJJrzRrAppS8dmWonodveM8c2iM+TIPwCtMNgJDpSx98OXZ5LiLkO/Z1ES5OYGH5/e1061Yp/i2njXQYVbDYllXEJiJlsJcVQTIScRD6IUIbf2tjqU7UQ6YFkH2o/ixtJIQwRSY4TfFZxbdhyFdIsEz+bpIEElNvQhMOPhV4xz",
+  "signatureStatus": "VALID",
+  "blockchain": {
+    "status": "ANCHORED",
+    "network": "SecureWipe-Forensics-Testnet",
+    "technology": "Hyperledger Fabric Compatible Prototype",
+    "transactionId": "TX-SWF-EF986EB7DA0C37CD-47C86B41",
+    "blockIndex": 3,
+    "blockHash": "390beb121cdd86e09c64009ca0df0bddce13321721cf951e0d577ae453d461d3",
+    "anchorHash": "ef986eb7da0c37cdf5613ea9c7413fd8b40f5bd6103336a7888d795185c020f6",
+    "anchoredAt": "2026-09-15T15:19:44.689Z"
+  }
+}

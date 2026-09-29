@@ -1,0 +1,22 @@
+{
+  "success": true,
+  "mode": "READ_ONLY",
+  "physicalDiskAccess": false,
+  "source": ".\\real_test\\What.jpg",
+  "sourceSize": 261264,
+  "candidatesFound": 1,
+  "limitations": [
+    "Signature carving cannot guarantee recovery of fragmented files",
+    "Original deleted filenames and NTFS metadata are not reconstructed in Phase 1",
+    "SSD TRIM or overwritten clusters can make deleted content unrecoverable",
+    "Container formats such as MP4/DOCX may require deeper parser-based reconstruction"
+  ],
+  "candidates": [
+    {
+      "type": "JPEG",
+      "offset": 0,
+      "size": 261264,
+      "output": ".\\testdata\\real_recovery_output\\recovered_1.jpg"
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+SECUREWIPE FORENSICS
+RECOVERY REPORT
+==============================
+
+Source image: testdata/test_image.bin
+Image size: 10485760 bytes
+Files carved: 1
+
+1. PDF
+   Extension: .pdf
+   Offset: 1024
+   Size: 51 bytes
+   Output: testdata/recovered/recovered_1.pdf
+
+SOURCE IMAGE MODIFIED: NO
+PHYSICAL DISK ACCESS: DISABLED
+ANALYSIS MODE: READ-ONLY
