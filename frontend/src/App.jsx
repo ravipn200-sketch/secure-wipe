@@ -1,7 +1,11 @@
 import { useEffect, useMemo, useState } from "react";
 
 // Shared backend API URL. Works on localhost and LAN devices.
-const API_URL = `${window.location.protocol}//${window.location.hostname}:5000/api`;
+const API_URL =
+  window.location.hostname === "localhost" ||
+  window.location.hostname === "127.0.0.1"
+    ? `${window.location.protocol}//${window.location.hostname}:5000/api`
+    : "https://secure-wipe-p6in.onrender.com/api";
 
 import {
   Activity,
