@@ -118,13 +118,16 @@ app.use(
   cors({
     origin: function (origin, callback) {
       const allowedOrigins = [
-        "http://localhost:5173",
-        "http://localhost:5174",
-        "http://127.0.0.1:5173",
-        "http://127.0.0.1:5174",
-        "http://10.239.224.172:5173",
-        "http://10.239.224.172:5174"
-      ];
+  "http://localhost:5173",
+  "http://localhost:5174",
+  "http://127.0.0.1:5173",
+  "http://127.0.0.1:5174",
+  "http://10.239.224.172:5173",
+  "http://10.239.224.172:5174",
+
+  // Production frontend
+  "https://secure-wipe-forensic.vercel.app"
+];
 
       // Allow requests with no Origin header
       // such as direct browser/API requests and local tools.
@@ -3610,22 +3613,14 @@ app.get(
       // Verification URL
       // ------------------------------------------------------
 
-      const host =
-        req.get("host") ||
-        `localhost:${PORT}`;
+      const frontendUrl =
+  process.env.FRONTEND_URL ||
+  "http://localhost:5174";
 
-      const frontendPort =
-        process.env.FRONTEND_PORT ||
-        "5174";
-
-      const hostname =
-        host
-          .split(":")[0];
-
-      const verificationUrl =
-        `${req.protocol}://${hostname}:${frontendPort}/?certificate=${encodeURIComponent(
-          certificateId
-        )}`;
+const verificationUrl =
+  `${frontendUrl}/?certificate=${encodeURIComponent(
+    certificateId
+  )}`;
 
       // ------------------------------------------------------
       // Generate QR code
@@ -4442,6 +4437,7 @@ app.post("/api/recovery/real-scan", (req, res) => {
 
 app.listen(
   PORT,
+  "0.0.0.0",
   () => {
 
     console.log("");
