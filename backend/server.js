@@ -513,6 +513,126 @@ app.post(
     );
 
     console.log("");
+    // --------------------------------------------------------
+// PLATFORM SAFETY GATE
+// --------------------------------------------------------
+// Render runs Linux and cannot execute the Windows .exe.
+// Use a deterministic, read-only simulation on non-Windows
+// platforms. The real C++ engine remains available locally
+// on Windows.
+
+if (process.platform !== "win32") {
+
+  console.log(
+    "Non-Windows platform detected:",
+    process.platform
+  );
+
+  console.log(
+    "Using SAFE RECOVERY SIMULATION."
+  );
+
+  const simulationSeed =
+    `SecureWipe-Forensics|${target}|SAFE-RECOVERY-SIMULATION`;
+
+  const simulatedSha256 =
+    crypto
+      .createHash("sha256")
+      .update(simulationSeed)
+      .digest("hex");
+
+  const simulatedCandidates = 3;
+
+  const simulatedImageSize =
+    fs.existsSync(recoveryImagePath)
+      ? fs.statSync(recoveryImagePath).size
+      : 32 * 1024 * 1024;
+
+  const result = {
+
+    success: true,
+
+    mode:
+      "SAFE_SIMULATION",
+
+    target,
+
+    safety: {
+
+      physicalDiskAccess:
+        false,
+
+      sourceImageModified:
+        false,
+
+      analysisMode:
+        "READ-ONLY",
+
+      executionEnvironment:
+        process.platform
+    },
+
+    statistics: {
+
+      imageSizeBytes:
+        simulatedImageSize,
+
+      candidatesFound:
+        simulatedCandidates,
+
+      highRelevance:
+        simulatedCandidates,
+
+      averageRecoverability:
+        96
+    },
+
+    recoveredFiles: [
+
+      {
+        type: "JPEG",
+        extension: ".jpg",
+        offset: 4096,
+        sha256: simulatedSha256
+      },
+
+      {
+        type: "PDF",
+        extension: ".pdf",
+        offset: 8192,
+        sha256:
+          crypto
+            .createHash("sha256")
+            .update(
+              `${simulationSeed}|PDF`
+            )
+            .digest("hex")
+      },
+
+      {
+        type: "DOCX",
+        extension: ".docx",
+        offset: 12288,
+        sha256:
+          crypto
+            .createHash("sha256")
+            .update(
+              `${simulationSeed}|DOCX`
+            )
+            .digest("hex")
+      }
+
+    ],
+
+    engineOutput:
+      "SAFE SIMULATION: Windows C++ recovery engine was not executed. No source image or physical disk was modified.",
+
+    message:
+      "Safe forensic recovery simulation completed successfully."
+  };
+
+  return res.json(result);
+}
 
     // --------------------------------------------------------
     // EXECUTE RECOVERY ENGINE
