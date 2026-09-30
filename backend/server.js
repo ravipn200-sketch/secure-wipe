@@ -2658,11 +2658,17 @@ fs.mkdirSync(
 
 function loadCertificatePrivateKey() {
 
-  if (
-    !fs.existsSync(
-      privateKeyPath
-    )
-  ) {
+  if (process.env.CERT_PRIVATE_KEY_B64) {
+
+    return Buffer
+      .from(
+        process.env.CERT_PRIVATE_KEY_B64,
+        "base64"
+      )
+      .toString("utf8");
+  }
+
+  if (!fs.existsSync(privateKeyPath)) {
 
     throw new Error(
       "Certificate private key not found."
@@ -2675,13 +2681,20 @@ function loadCertificatePrivateKey() {
   );
 }
 
+
 function loadCertificatePublicKey() {
 
-  if (
-    !fs.existsSync(
-      publicKeyPath
-    )
-  ) {
+  if (process.env.CERT_PUBLIC_KEY_B64) {
+
+    return Buffer
+      .from(
+        process.env.CERT_PUBLIC_KEY_B64,
+        "base64"
+      )
+      .toString("utf8");
+  }
+
+  if (!fs.existsSync(publicKeyPath)) {
 
     throw new Error(
       "Certificate public key not found."
@@ -2693,6 +2706,7 @@ function loadCertificatePublicKey() {
     "utf8"
   );
 }
+
 
 // ------------------------------------------------------------
 // Canonical certificate payload
