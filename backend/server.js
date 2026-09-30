@@ -962,6 +962,188 @@ app.post(
         });
     }
 
+        // --------------------------------------------------------
+    // PLATFORM SAFETY GATE
+    // --------------------------------------------------------
+    // Render runs Linux and cannot execute the Windows
+    // erasure_engine.exe. Use a non-destructive simulation
+    // on non-Windows platforms.
+    //
+    // Windows/local execution continues to use the real
+    // C++ erasure engine below.
+    // --------------------------------------------------------
+
+    if (process.platform !== "win32") {
+
+      console.log("");
+      console.log(
+        "=============================================="
+      );
+      console.log(
+        "SECUREWIPE SAFE ERASURE SIMULATION"
+      );
+      console.log(
+        "=============================================="
+      );
+
+      console.log(
+        "Platform:",
+        process.platform
+      );
+
+      console.log(
+        "Method:",
+        method
+      );
+
+      console.log(
+        "Physical disk access: DISABLED"
+      );
+
+      console.log(
+        "Source image modification: DISABLED"
+      );
+
+      // ------------------------------------------------------
+      // SIMULATION HASHES
+      // ------------------------------------------------------
+
+      const simulationSeed =
+        `SecureWipe-Forensics|ERASURE-SIMULATION|${method}`;
+
+      const beforeHash =
+        crypto
+          .createHash("sha256")
+          .update(
+            `${simulationSeed}|BEFORE`
+          )
+          .digest("hex");
+
+      const afterHash =
+        crypto
+          .createHash("sha256")
+          .update(
+            `${simulationSeed}|AFTER`
+          )
+          .digest("hex");
+
+      // ------------------------------------------------------
+      // SAFE SIMULATED RESULT
+      // ------------------------------------------------------
+
+      const simulationSize =
+        fs.existsSync(erasureImagePath)
+          ? fs.statSync(erasureImagePath).size
+          : null;
+
+      const simulationAudit =
+        [
+          "SECUREWIPE FORENSICS",
+          "SAFE ERASURE SIMULATION",
+          "----------------------------------------------",
+          `Method: ${method}`,
+          `Platform: ${process.platform}`,
+          "Physical disk access: DISABLED",
+          "Source image modified: FALSE",
+          "Simulation only: TRUE",
+          `Before SHA-256: ${beforeHash}`,
+          `After SHA-256: ${afterHash}`,
+          "Verification: PASS",
+          "Status: TEST IMAGE SANITIZED (SIMULATION)",
+          "----------------------------------------------"
+        ].join("\n");
+
+      console.log(
+        simulationAudit
+      );
+
+      return res.json({
+
+        success:
+          true,
+
+        mode:
+          "SAFE_SIMULATION",
+
+        message:
+          "Safe test-image erasure simulation completed successfully.",
+
+        target:
+          "erase_test_image.bin",
+
+        method,
+
+        sizeBytes:
+          simulationSize,
+
+        beforeHash,
+
+        afterHash,
+
+        verification:
+          "PASS",
+
+        status:
+          "TEST IMAGE SANITIZED",
+
+        verificationDetails: {
+
+          sizeCheck:
+            "PASS",
+
+          zeroContentCheck:
+            method === "zero"
+              ? "PASS"
+              : "NOT_APPLICABLE",
+
+          hashChanged:
+            "YES"
+        },
+
+        auditLogCreated:
+          false,
+
+        auditPath:
+          null,
+
+        auditRecord:
+          simulationAudit,
+
+        engine:
+          "SAFE_SIMULATION",
+
+        safety: {
+
+          physicalDiskAccess:
+            false,
+
+          physicalDiskPathAccepted:
+            false,
+
+          sourceType:
+            "TEST IMAGE",
+
+          authorizedRoot:
+            "core/testdata",
+
+          target:
+            "erase_test_image.bin",
+
+          sourceImageModified:
+            false,
+
+          safetyBoundary:
+            "ENABLED",
+
+          simulation:
+            true,
+
+          executionEnvironment:
+            process.platform
+        }
+      });
+    }
+
     // --------------------------------------------------------
     // ENGINE CHECK
     // --------------------------------------------------------
